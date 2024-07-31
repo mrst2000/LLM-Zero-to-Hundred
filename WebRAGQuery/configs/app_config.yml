@@ -3,7 +3,7 @@ memory:
   num_entries: 2
 
 llm_function_caller:
-  gpt_model: gpt-35-turbo-16k
+  gpt_model: llama-3.1-70b-versatile
   temperature: 0
   system_role:
     "As a chatbot, your goal is to respond to the user's question respectfully and concisely.\
@@ -12,27 +12,27 @@ llm_function_caller:
     "
 
 llm_summarizer:
-  gpt_model: gpt-35-turbo-16k
+  gpt_model: llama-3.1-70b-versatile
   temperature: 0
   system_role:
     "You will recieve the chat history, user's new query, along with the web search result for that query. Provide the user with the most relevant information.\n\n"
 
 llm_rag:
-  gpt_model: gpt-35-turbo-16k
+  gpt_model: llama-3.1-70b-versatile
   temperature: 0
   system_role:
     "You will recieve the chat history, user's new query, along with the web search result for that query on a website content. Provide the user with the most relevant information.\
     In case the user's answer does not exist in the provided content and you want to use your own knwoledge, inform the user.\n\n"
 
 RAG:
-  embedding_model_engine: "text-embedding-ada-002"
+  embedding_model_engine: "dunzhang/stella_en_1.5B_v5"
   chunk_size: 1000
-  chunk_overlap: 250
+  chunk_overlap: 200
   persist_directory: "data/vectordb/"
-  k: 3
+  k: 5
 
 summarizer_config:
-  gpt_model: gpt-35-turbo-16k
+  gpt_model: llama-3.1-70b-versatile
   max_final_token: 3000
   character_overlap: 100
   token_threshold: 0
