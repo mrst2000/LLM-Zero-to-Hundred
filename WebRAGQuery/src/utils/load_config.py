@@ -67,3 +67,4 @@ class LoadConfig:
         openai.api_base = os.getenv("OPENAI_API_BASE")
         openai.api_version = os.getenv("OPENAI_API_VERSION")
         openai.api_key = os.getenv("OPENAI_API_KEY")
+        hf_api_key = os.getenv("hf_api_key")
