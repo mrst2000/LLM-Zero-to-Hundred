@@ -2,6 +2,8 @@ from typing import List, Dict
 import openai
 from langchain.vectorstores import Chroma
 from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain_community.embeddings import HuggingFaceInstructEmbeddings
+
 
 
 class LLM_RAG:
@@ -28,7 +30,14 @@ class LLM_RAG:
             print(result)
             ```
         """
-        embedding_model = OpenAIEmbeddings()
+        model_name = "dunzhang/stella_en_1.5B_v5"
+        model_kwargs = {'device': 'cpu', 'trust_remote_code': True}
+        encode_kwargs = {'normalize_embeddings': True}
+        embedding_model = HuggingFaceInstructEmbeddings(
+            model_name=model_name,
+            model_kwargs=model_kwargs,
+            encode_kwargs=encode_kwargs
+        )
         vectordb = Chroma(persist_directory=persist_directory,
                           embedding_function=embedding_model)
         docs = vectordb.similarity_search(user_query, k=k)
