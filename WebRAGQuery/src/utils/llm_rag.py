@@ -31,7 +31,7 @@ class LLM_RAG:
             ```
         """
         model_name = "dunzhang/stella_en_1.5B_v5"
-        model_kwargs = {'device': 'cpu', 'trust_remote_code': True}
+        model_kwargs = {'device': 'cuda:0', 'trust_remote_code': True}
         encode_kwargs = {'normalize_embeddings': True}
         embedding_model = HuggingFaceInstructEmbeddings(
             model_name=model_name,
