@@ -3,6 +3,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from typing import List
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.document_loaders import WebBaseLoader
+from langchain_community.embeddings import HuggingFaceInstructEmbeddings
 import traceback
 
 
@@ -49,7 +50,14 @@ class PrepareURLVectorDB:
         """Other options: CharacterTextSplitter, NotionDirectoryLoader, TokenTextSplitter, etc."""
         self.url = self._ensure_https(url)
         self.persist_directory = persist_directory
-        self.embedding = OpenAIEmbeddings()
+        model_name = "dunzhang/stella_en_1.5B_v5"
+        model_kwargs = {'device': 'cpu', 'trust_remote_code': True}
+        encode_kwargs = {'normalize_embeddings': True} 
+        self.embedding = HuggingFaceInstructEmbeddings(
+            model_name=model_name,
+            model_kwargs=model_kwargs,
+            encode_kwargs=encode_kwargs
+        )
 
     def _ensure_https(self, url: str) -> str:
         if not url.startswith("https://"):
